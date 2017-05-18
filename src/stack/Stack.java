@@ -1,13 +1,13 @@
 package stack;
 
-public interface Stack<E> {
+public interface Stack<T> {
 
 	public boolean isEmpty();
 
-	public E top() throws Underflow;
+	public T top() throws Underflow;
 
-	public Stack<E> push(E element);
+	public Stack<T> push(T element);
 
-	public Stack<E> pop() throws Underflow;
+	public Stack<T> pop() throws Underflow;
 
 }
