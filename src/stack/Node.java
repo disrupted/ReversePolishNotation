@@ -1,39 +1,39 @@
 package stack;
 
-public class Node <T> {
+public class Node<T>
+{
+    private T value;
+    private Node<T> next;
 
+    /**
+     * Creates a node with null references to its element and next node
+     */
+    public Node() {}
 
-  private T value;
-  private Node next;
-
-  public Node(T value){
-    this.value = value;
-  }
-
-  public T getValue(){
-    return value;
-  }
-
-  public void setValue(T value){
-    this.value = value;
-  }
-
-  public Node getNext(){
-    return next;
-  }
-
-  public void setNext(Node nextNode){
-    this.next = nextNode;
-  }
-
-  public String nodeToString(){
-    String v = "Value: " + value;
-    if(next == null){
-      v += "null";
-    } else {
-      v += next.toString();
+    public Node(T value, Node<T> next)
+    {
+        this.value = value;
+        this.next = next;
     }
-    return v;
-  }
+    
+    public T getElement()
+    {
+        return value;
+    }
 
+    public Node<T> getNext()
+    {
+        return next;
+    }
+
+    public void setElement(T newElem)
+    {
+        value = newElem;
+    }
+
+    public void setNext(Node<T> newNext)
+    {
+        next = newNext;
+    }
+    
 }
