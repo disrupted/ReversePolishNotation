@@ -31,11 +31,11 @@ public class Postfix {
     return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"));
   }
 
-  public static boolean isLowerPrecedence(String topOfStack, String n) {
+  public static boolean isLowerPrecedence(String topOfStack, String currentToken) {
     switch (topOfStack) {
       case "+":
       case "-":
-        return n.equals("*") || n.equals("/");
+        return currentToken.equals("*") || currentToken.equals("/");
       case "*":
       case "/":
         return false;
@@ -53,14 +53,13 @@ public class Postfix {
         if (isInt(operand)) {
           output += operand + " ";
         } else if (isOperator(operand)) {
-          if (stack.peek() != null && !isLowerPrecedence(stack.peek(), operand)) {
+          while (stack.peek() != null && !isLowerPrecedence(stack.peek(), operand)) {
+            System.out.println("topOfStack (" + stack.peek() + ") is of higher precedence than current token (" + operand + ")");
             try {
               output += stack.pop() + " ";
             } catch (Underflow underflow) {
               underflow.printStackTrace();
             }
-          } else {
-            System.out.println("topOfStack (" + stack.peek() + ") is of lower precedence than current token (" + operand + ")");
           }
           stack.push(operand); // operator
         } //else {
