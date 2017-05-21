@@ -40,22 +40,13 @@ public class LinkedListStack<T> implements Stack<T> {
   @Override
   public String toString() {
     String result = "";  // iteration : collecting all informations from list-nodes
-    result += first.toString();
-    Node<T> nextNode = first.getNext();
-    while (nextNode != null) {
-      result += ", " + nextNode.toString();
-      nextNode = nextNode.getNext();
-    }
-    return result;
-  }
-
-  public String listToString() {
-    String result = "";
-    result += first.toString();
-    Node<T> nextNode = first.getNext();
-    while (nextNode != null) {
-      result += nextNode.toString();
-      nextNode = nextNode.getNext();
+    if (first != null) {
+      result += first.toString();
+      Node<T> nextNode = first.getNext();
+      while (nextNode != null) {
+        result += ", " + nextNode.toString();
+        nextNode = nextNode.getNext();
+      }
     }
     return result;
   }
