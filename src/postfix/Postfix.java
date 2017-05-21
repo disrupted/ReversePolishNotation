@@ -27,21 +27,53 @@ public class Postfix {
     return true;
   }
 
+  public static boolean isOperator(String s) {
+    return (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"));
+  }
+
+  public static boolean isLowerPrecedence(String topOfStack, String n) {
+    switch (topOfStack) {
+      case "+":
+      case "-":
+        return n.equals("*") || n.equals("/");
+      case "*":
+      case "/":
+        return false;
+    }
+    return true;
+  }
+
   public String infixToPostfix(String infix) {
     // TODO Auto-generated method stub
-    String output = "";
-    Stack<String> stack = new LinkedListStack<>();
-    String[] operands = infix.split(" ");
-    for (String operand : operands) {
-      if (isInt(operand)) {
-        //stack.push(operand);
-        output += operand + " ";
-      } else {
-        stack.push(operand); // operator
+    if (infix.length() > 0) {
+      String output = "";
+      Stack<String> stack = new LinkedListStack<>();
+      String[] operands = infix.split(" ");
+      for (String operand : operands) {
+        if (isInt(operand)) {
+          output += operand + " ";
+        } else if (isOperator(operand)) {
+          if (stack.peek() != null && !isLowerPrecedence(stack.peek(), operand)) {
+            try {
+              output += stack.pop() + " ";
+            } catch (Underflow underflow) {
+              underflow.printStackTrace();
+            }
+          } else {
+            System.out.println("topOfStack (" + stack.peek() + ") is of lower precedence than current token (" + operand + ")");
+          }
+          stack.push(operand); // operator
+        } //else {
+        //throw new IllegalArgumentException();
+        //}
       }
+
+      output += stack.toString().
+
+              replace(",", "");
+      return output;
     }
-    output += stack.toString().replace(",", "");
-    return output;
+    return null;
   }
 
   public double evaluate(String postfix) {
