@@ -14,7 +14,8 @@ public class Postfix {
   public static void main(String[] args) {
     System.out.println("Hello World");
     Postfix pf = new Postfix();
-    pf.evaluate("Test1+2");
+    System.out.println(pf.evaluate("1 2 +"));
+    System.out.println(pf.infixToPostfix("1 + 2"));
   }
 
   public static boolean isInt(String s) {
@@ -28,7 +29,19 @@ public class Postfix {
 
   public String infixToPostfix(String infix) {
     // TODO Auto-generated method stub
-    return null;
+    String output = "";
+    Stack<String> stack = new LinkedListStack<>();
+    String[] operands = infix.split(" ");
+    for (String operand : operands) {
+      if (isInt(operand)) {
+        //stack.push(operand);
+        output += operand + " ";
+      } else {
+        stack.push(operand); // operator
+      }
+    }
+    output += stack.toString().replace(",", "");
+    return output;
   }
 
   public double evaluate(String postfix) {
