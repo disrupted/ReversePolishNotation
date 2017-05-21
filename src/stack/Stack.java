@@ -12,4 +12,6 @@ public interface Stack<T> {
 
   public String toString();
 
+  public T peek();
+
 }

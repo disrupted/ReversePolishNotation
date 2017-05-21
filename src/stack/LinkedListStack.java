@@ -50,4 +50,11 @@ public class LinkedListStack<T> implements Stack<T> {
     }
     return result;
   }
+
+  @Override
+  public T peek() {
+    if (isEmpty())
+      return null;
+    return first.getElement();
+  }
 }
