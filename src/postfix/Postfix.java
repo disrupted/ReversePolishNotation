@@ -52,6 +52,16 @@ public class Postfix {
       for (String operand : operands) {
         if (isInt(operand)) {
           output += operand + " ";
+        } else if (operand.equals("(")) {
+          stack.push(operand);
+        } else if (operand.equals(")")) {
+          try {
+            while (stack.peek() != null && !stack.peek().equals("(")) {
+              output += stack.pop() + " ";
+            }
+            stack.pop(); // remove open paranthesis
+          } catch (Underflow ignored) {
+          }
         } else if (isOperator(operand)) {
           while (stack.peek() != null && !isLowerPrecedence(stack.peek(), operand)) {
             System.out.println("topOfStack (" + stack.peek() + ") is of higher precedence than current token (" + operand + ")");
@@ -67,10 +77,8 @@ public class Postfix {
         //}
       }
 
-      output += stack.toString().
-
-              replace(",", "");
-      return output;
+      output += stack.toString().replace(",", ""); // append content of Stack
+      return output.trim(); // remove trailing spaces from result
     }
     return null;
   }
