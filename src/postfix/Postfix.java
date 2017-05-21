@@ -132,8 +132,10 @@ public class Postfix {
     while (true) {
       System.out.print("\nPlease type in an infix String: ");
       String input = sc.nextLine();
-      System.out.println("→ postfix: " + infixToPostfix(input));
-      System.out.println("→ evaluation: " + evaluate(input));
+      if (input.equals("quit")) break;
+      String postfix = infixToPostfix(input);
+      System.out.println("→ postfix: " + postfix);
+      System.out.println("→ evaluation: " + evaluate(postfix));
     }
   }
 }
