@@ -4,6 +4,8 @@ import stack.LinkedListStack;
 import stack.Stack;
 import stack.Underflow;
 
+import java.util.Scanner;
+
 public class Postfix {
   Stack<Double> stack;
 
@@ -12,10 +14,8 @@ public class Postfix {
   }
 
   public static void main(String[] args) {
-    System.out.println("Hello World");
     Postfix pf = new Postfix();
-    System.out.println(pf.evaluate("1 2 +"));
-    System.out.println(pf.infixToPostfix("1 + 2"));
+    pf.userInput();
   }
 
   public static boolean isInt(String s) {
@@ -40,7 +40,7 @@ public class Postfix {
       case "/":
         return false;
     }
-    return true;
+    return true; // digits are always of lower precedence than operators
   }
 
   public String infixToPostfix(String infix) {
@@ -127,4 +127,13 @@ public class Postfix {
     return 0;
   }
 
+  public void userInput() {
+    Scanner sc = new Scanner(System.in);
+    while (true) {
+      System.out.print("\nPlease type in an infix String: ");
+      String input = sc.nextLine();
+      System.out.println("→ postfix: " + infixToPostfix(input));
+      System.out.println("→ evaluation: " + evaluate(input));
+    }
+  }
 }
