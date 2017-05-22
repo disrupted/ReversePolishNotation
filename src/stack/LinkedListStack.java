@@ -24,8 +24,9 @@ public class LinkedListStack<T> implements Stack<T> {
   }
 
   @Override
-  public void push(T element) {
+  public Stack<T> push(T element) {
     first = new Node<T>(element, first);
+    return this;
   }
 
   @Override

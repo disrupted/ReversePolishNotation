@@ -6,7 +6,7 @@ public interface Stack<T> {
 
   public T top() throws Underflow;
 
-  public void push(T element);
+  public Stack<T> push(T element);
 
   public T pop() throws Underflow;
 
